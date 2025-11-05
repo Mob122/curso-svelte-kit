@@ -1,2 +1,29 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<!-- <script>
+	import MostrarNombre from "$lib/components/MostrarNombre.svelte";
+	
+</script>
+
+<h1>¡Fuera del componente!</h1>
+<MostrarNombre /> -->
+
+<!-- <script>
+	import NumeroRandom from "$lib/components/NumeroRandom.svelte";
+	
+	</script>
+	
+	<h1>¡Fuera del componente!</h1>
+	<NumeroRandom /> -->
+
+<!-- <script>
+	import Contador from "$lib/components/Contador.svelte";
+	
+	</script>
+	
+	<Contador /> -->
+
+<script>
+	import Boton from "$lib/components/Boton.svelte";
+
+</script>
+
+<Boton />
