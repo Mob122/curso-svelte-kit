@@ -23,7 +23,17 @@
 
 <script>
 	import Boton from "$lib/components/Boton.svelte";
+	import { AlarmClock, Search } from "@lucide/svelte";
 
 </script>
 
-<Boton />
+
+<Boton>
+	{#snippet izquierda()}
+		<Search />
+	{/snippet}
+	Texto
+	{#snippet derecha()}
+		<AlarmClock />
+	{/snippet}
+</Boton>
