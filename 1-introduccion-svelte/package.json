@@ -37,6 +37,8 @@
 		"vite": "^7.1.10"
 	},
 	"dependencies": {
-		"@lucide/svelte": "^0.552.0"
+		"@lucide/svelte": "^0.552.0",
+		"lorem-ipsum": "^2.0.8",
+		"uuid": "^13.0.0"
 	}
 }
