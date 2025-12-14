@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Notification from "$lib/components/Notification.svelte";
+	import Sheet from "$lib/components/sheet/Sheet.svelte";
     // 1. Proxy es una característica avanzada de JavaScript que permite crear un objeto que envuelve a otro objeto (llamado target) y intercepta las operaciones realizadas sobre él, como la lectura y escritura de propiedades.
     // const target = {
     //     nombre: 'Martin',
@@ -97,6 +99,35 @@
     // })
 
 
+    // import { generateNotifications } from "$lib/utils/generate-notifications";
+    
+    // let notificaciones = $state(generateNotifications(3));
+    // let notificaciones = $state.raw(generateNotifications(3)); // Utiliza .raw para evitar proxies anidados, para casos como este donde cada notificación es un objeto de un servicio externo y yo sé que no voy a mutar esas notificaciones individualmente.
+
+    // console.log(notificaciones);
+
+    // $inspect(notificaciones);
+
+    // 4. Definición de una variable llamada datos.
+    let data = $state([
+        [
+            { value: 'Item', bgColor: '#6aa84f', color: '#fff'},
+            { value: 'Precio', bgColor: '#6aa84f', color: '#fff'},
+            { value: 'Cantidad', bgColor: '#6aa84f', color: '#fff'},
+            { value: 'Total', bgColor: '#51803d', color: '#fff'}
+        ],
+        [{ value: 'Manzanas' }, { value: "1.5" }, { value: "4" }, {value: '=MULTIPLY(B2,C2)'}],
+        [{ value: 'Naranjas' }, { value: "2.0" }, { value: "3" }, {value: '=MULTIPLY(B3,C3)'}],
+        [{ value: 'Plátanos' }, { value: "1.2" }, { value: "5" }, {value: '=MULTIPLY(B4,C4)'}],
+        [{ value: 'Peras' }, { value: "1.8" }, { value: "2" }, {value: '=MULTIPLY(B5,C5)'}],
+        [
+            { value: '', bgColor: '#6aa84f', color: '#fff' },
+            { value: '', bgColor: '#6aa84f', color: '#fff' },
+            { value: 'Total', bgColor: '#6aa84f', color: '#fff' },
+            { value: '=SUM(D2, D3, D4, D5)', bgColor: '#51803d', color: '#fff' },
+        ]
+    ])
+        
 </script>
 
 <!-- 1_2_3. Entendiendo la Reactividad Profunda en Svelte -->
@@ -125,6 +156,38 @@
 }}>
     Log Snapshot
 </button> -->
+
+<!-- 4. Bucle de Notificaciones -->
+<!-- <h1>Notificaciones</h1> -->
+<!-- <ul> -->
+    
+     <!-- {#each notificaciones as {title, body, date}, index} -->
+    <!-- {#each notificaciones as notificacion, index (notificacion.id)} -->
+    <!-- {#each notificaciones as notificacion, index (notificacion.id)} -->
+        <!-- {@const dateObject = new Date(date)} -->
+        <!-- <Notification 
+            { notificacion } 
+            { index }
+            onremove= {(id) => {
+                // alert(`Removiendo notificación en el índice ${id}`);
+                // notificaciones.splice(index, 1);
+                notificaciones = notificaciones.filter(n => n.id !== id);
+            }
+        } />
+        {:else}
+        <p>No hay notificaciones</p>
+    {/each}
+</ul> -->
+
+<!-- 5. Componentes de la hoja de cálculo: inicialización y ayuda -->
+ <Sheet {data} />
+
+ <pre>
+    {JSON.stringify(data, null, 2) // data: la variable que contiene los datos de la hoja de cálculo
+                                // null: indica que no se debe aplicar ninguna función de reemplazo a los valores
+                                // 2: especifica el número de espacios para la indentación en la representación JSON
+    }
+ </pre>
 
 <style>
     :global {

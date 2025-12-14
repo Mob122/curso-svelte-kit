@@ -15,18 +15,18 @@
         onlefthover?: () => void;
     }
     
-    let buton: HTMLButtonElement;
+    // let buton: HTMLButtonElement;
     let isIzquierdaHovered = $state(false);
     let { izquierda, derecha, size = 'md', shadow = false, children, class: _class, onlefthover, ...props }: Props = $props();
 
-    export function focus() {
-        buton?.focus();
+    // export function focus() {
+    //     buton?.focus();
 
-    }
+    // }
 
-    export function getButton() {
-        return buton;
-    }
+    // export function getButton() {
+    //     return buton;
+    // }
 </script>
 
 <!-- {#snippet sumar(a: number, b:number)}
@@ -36,13 +36,13 @@
     <span>{a} + {b} = {@render negrita(`${a + b}`)}</span>
 {/snippet} -->
 
-<p>Valor {isIzquierdaHovered}</p>
+<!-- <p>Valor {isIzquierdaHovered}</p> -->
 
 <!-- <button class={{"bg-amber-400 cursor-pointer flex font-bold gap-2 px-4 py-2 rounded-md": true, "text-sm": size === 'sm', "text-xl": size === 'md', "text-lg": size === 'lg', "shadow-2xl": shadow}} -->
  <div class="flex">
+     <!-- bind:this={buton} -->
      <svelte:element 
          this={props.href ? 'a' : 'button'}
-         bind:this={buton}
          class={[_class, "bg-amber-400 cursor-pointer flex font-bold gap-2 px-4 py-2 rounded-md", size === 'sm' && 'text-xl', size === 'md' && 'text-3xl', size === 'lg' && 'text-7xl', shadow && 'shadow-2xl']}
          onmouseenter={() => { onlefthover?.(); isIzquierdaHovered = true; }}
          onmouseleave={() => isIzquierdaHovered = false}
