@@ -1,6 +1,6 @@
 export type Celda = {
     value?: string,
-    bgCOlor?: string,
+    bgColor?: string,
     color?: string
 }
 
