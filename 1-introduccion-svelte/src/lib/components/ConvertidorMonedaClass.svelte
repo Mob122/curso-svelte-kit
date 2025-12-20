@@ -1,63 +1,5 @@
 <script lang="ts">
-    class ConvertidorMoneda {
-        valorBase: number | undefined = $state(1);
-        monedaActual = $state('usd');
-        tasaCambioActual: Record<string, number> = $state({});
-        monedaObjetivo = $state('eur');
-        // monedasPromesa = fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json')
-        //     .then(response => response.json());
-        monedas = $state({});
-        cargando = $state(true);
-        error: string | undefined = $state(undefined);
-
-        constructor(valorBase: number, monedaActual: string, monedaObjetivo: string) {
-            this.valorBase = valorBase;
-            this.monedaActual = monedaActual;
-            this.monedaObjetivo = monedaObjetivo;
-            this.#cargarMonedas();
-
-            $effect(() => {
-                this.#fetchTasasCambio();
-            })
-        }
-
-        async #fetchTasasCambio() {
-            const response = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/' + this.monedaActual + '.json');
-            const responseJSON = await response.json();
-            this.tasaCambioActual = responseJSON[this.monedaActual];
-        }
-
-        async #cargarMonedas() {
-            this.cargando = true;
-            this.error = undefined;
-
-            try {
-                const response = await fetch('https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies.json')
-                    .then(response => response.json());
-                this.monedas = response;
-            } catch {
-                this.error = 'Error al cargar las monedas';
-            } finally {
-                this.cargando = false;
-            }        
-        }
-
-        #calularValorObjetivo() {
-            return this.valorBase && this.tasaCambioActual[this.monedaObjetivo] && +(this.valorBase * this.tasaCambioActual[this.monedaObjetivo]).toFixed(3);
-        }
-
-        #calularValorBase(valorObjetivo?: number) {
-            return valorObjetivo && this.tasaCambioActual[this.monedaObjetivo] && +(valorObjetivo / this.tasaCambioActual[this.monedaObjetivo]).toFixed(3);
-        }
-
-        get valorObjetivo() {
-            return this.#calularValorObjetivo();
-        }
-
-        set valorObjetivo(v) {
-            this.valorBase = this.#calularValorBase(v);
-        }
-    }
+    import ConvertidorMoneda from "$lib/utils/currency-converter.svelte";
 
     const cc = new ConvertidorMoneda(1, 'usd', 'eur'); // Es mejor evitar destructurar clases en Svelte porque pierde reactividad por la manera en que Svelte detecta cambios.
 
@@ -89,7 +31,7 @@
 
         <span class="block font-bold text-3xl">
             {
-                Number(cc.tasaCambioActual[cc.monedaObjetivo]).toLocaleString('es-PE', {
+                Number(cc.tasa).toLocaleString('es-PE', {
                     style: 'currency',
                     currency: cc.monedaObjetivo,
                     currencyDisplay: 'name'
@@ -153,6 +95,20 @@
             {/each}
         </select>
     </div>
+
+    <div class="flex gap-2 justify-end mt-2.5">
+        <button class="bg-orange-500 cursor-pointer font-bold px-4 py-2 rounded-md text-xs" onclick={() => {
+            cc.switch()
+        }}>
+            Intercambiar
+        </button>        
+        <button class="bg-orange-500 cursor-pointer font-bold px-4 py-2 rounded-md text-xs" onclick={() => {
+            cc.reset()
+        }}>
+            Restablecer
+        </button>        
+    </div>
+    
 </div>
 {/if}
 
