@@ -1,48 +1,53 @@
 <script lang='ts'>
-	import { SvelteDate } from "svelte/reactivity";
+	import { browser } from '$app/environment';
+	import { on } from 'svelte/events';
+	import { createSubscriber } from 'svelte/reactivity';
+	import { scrollY } from 'svelte/reactivity/window';
+    
+    // import ContadorClick from "$lib/components/ContadorClick.svelte";
+	// import ContadorClickDoble from "$lib/components/ContadorClickDoble.svelte";
 
-	// import ConvertidorMoneda from "$lib/components/ConvertidorMoneda.svelte";
-	// import ConvertidorMonedaClass from "$lib/components/ConvertidorMonedaClass.svelte";
+    // let scrollY = $state(browser ? window.scrollY : 0);
 
-    // Sin la clase reactive de Svelte.
-    // let date = $state(new Date());
-
+    // Agregar un efecto para actualizar el scrollY cuando se haga scroll.
     // $effect(() => {
-    //     const interval = setInterval(() => {
-    //         date = new Date();
-    //     }, 1000);
-
-    //     return () => clearInterval(interval);
+    //     // Agregar un event listener para el scroll.
+    //     window.addEventListener('scroll', e => {
+    //         scrollY = window.scrollY;
+    //     })
+    //     // Limpiar el event listener cuando el componente se destruya.
+    //     return () => {
+    //         window.removeEventListener('scroll', e => {
+    //             scrollY = window.scrollY;
+    //         })
+    //     }
     // })
 
-    // Con la clase reactive de Svelte.
-    let date = new SvelteDate();
-
-    $effect(() => {
-        const interval = setInterval(() => {
-            date.setTime(Date.now());
-        }, 1000);
-
-        return () => clearInterval(interval);
-    })
-    
-
+    // const sub = createSubscriber((update) => {
+    //     console.log('init');
+    //     const off = on(window, 'scroll', update);
+    //     return () => {
+    //         console.log('cleanup');
+    //         off();
+    //     }
+    // })
 </script>
 
-<!-- <ConvertidorMonedaClass /> -->
+<!-- <div class="space-y-2">
+    <ContadorClick />
+    <ContadorClick />
+    <ContadorClick />
+    
+    <ContadorClickDoble />
+</div> -->
 
-<p>
-    {
-        date.getHours().toString().padStart(2, '0')
-    }: 
-    {
-        date.getMinutes().toString().padStart(2, '0')
-    }
-    : 
-    {
-        date.getSeconds().toString().padStart(2, '0')
-    }
-</p>
+<h1 class="fixed">
+    <!-- {sub()}{browser ? window.scrollY : 0} -->
+     {scrollY.current}
+</h1>
+<div class="h-[2000px]">
+
+</div>
 
 <style>
     :global {

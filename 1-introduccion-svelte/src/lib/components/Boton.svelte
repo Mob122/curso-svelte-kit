@@ -51,7 +51,7 @@
          >
          <!-- style="background-color: {bgColor}; color: {textColor}"   -->
          <!-- style:background-color|important={bgColor} -->
-         <!-- style:--buttonBgColor={bgColor}x
+         <!-- style:--buttonBgColor={bgColor}
      style:--buttonTextColor={textColor} -->
          {#if izquierda}
              <div>
