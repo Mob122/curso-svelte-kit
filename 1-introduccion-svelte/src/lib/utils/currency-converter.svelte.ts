@@ -70,7 +70,7 @@ class ConvertidorMoneda {
         // $effect(() => {
         //     this.#fetchTasasCambio();
         // })
-
+        
         this.#fetchTasasCambio();
     }
 

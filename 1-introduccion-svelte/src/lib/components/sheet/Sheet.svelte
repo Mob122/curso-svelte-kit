@@ -5,7 +5,7 @@
     // console.log(numeroAAlfabeto(26));
     // console.log(celdaAIndice('b1'));
     
-    let { data = $bindable() } : { data: Celda[][] } = $props(); // bindable permite que la variable data sea vinculada desde el componente padre.
+    let { data = $bindable() } : { data: Celda[][] } = $props(); // bindable permite que la variable data sea vinculada desde el componente padre, con el fin de que los cambios realizados en el componente hijo se reflejen en el padre.
 
     let editarCelda: string | null = $state(null);
     let seleccionarCelda: string | null = $state(null);
