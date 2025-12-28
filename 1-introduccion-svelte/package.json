@@ -40,6 +40,7 @@
 		"@lucide/svelte": "^0.552.0",
 		"konva": "^10.0.12",
 		"lorem-ipsum": "^2.0.8",
+		"tippy.js": "^6.3.7",
 		"uuid": "^13.0.0"
 	}
 }
