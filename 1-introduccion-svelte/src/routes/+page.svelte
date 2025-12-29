@@ -1,159 +1,61 @@
 <script lang='ts'>
-	import BuggyComponent from "$lib/components/BuggyComponent.svelte";
-    import { scrollY } from "svelte/reactivity/window";
-	import VideoPlayer, {getAllVideo, pauseAll, playAll} from "$lib/components/VideoPlayer.svelte";
-
-	// import tippy from "tippy.js";
-    // import "tippy.js/dist/tippy.css";
-
-    // import longpress from "$lib/actions/longpress.svelte";
-
-    
-    // let mostrarBoton = $state(true);
-    // let duracion = $state(3000);
+	import Contador from "$lib/components/Contador.svelte";
+	import fadejs from "$lib/transitions/fadejs";
+	import spin from "$lib/transitions/spin";
+	import { cubicInOut } from "svelte/easing";
+	import { blur, fade, fly } from "svelte/transition";
 
 
-    // let button: HTMLButtonElement;
-
-    // $effect(() => {
-    //     const tooltop = tippy(button, {
-    //         content: "Hello Tippy"                        
-    //     })        
-    
-    //     return () => {
-        //         tooltop.destroy();
-        //     }
-        // })
-
-
-    // import tippy, { tippy2 } from "$lib/actions/tippy.svelte";
-
-    // let content = $state("Hello Tippy from Svelte Action!");
-
-
-
-    // let scrollY = $state(0);
-    // let visibilityState = $state(null);
-
-
-
-
-    // let textAreaWidth = $state();
-    // let textAreaHeight = $state();
-
-
-
-    // let imageWidth = $state();
-    // let imageHeight = $state();
-
-    let showVideo = $state(true);
+    let mostrarDiv = $state(false);
 </script>
+<!-- <input type="checkbox" bind:checked={mostrarDiv}>
 
-<!-- <label for="checkbox">
-    <input type="checkbox" bind:checked={mostrarBoton}>
-    Mostrar botón
-</label>
-<label for="range">
-    <input type="range" name="range" id="range" bind:value={duracion} max="4000" step="100">
-    {duracion} ms
-</label> -->
-
-<!-- {#if mostrarBoton} -->
-    <!-- Lo que hace el "use:" es aplicar una acción a un elemento -->
-    <!-- <button 
-    use:longpress={() => ({duracion}) } 
-    onlongpress={() => console.log('Has hecho longpress!')}
-    >Text</button>    
+{#if mostrarDiv} -->
+    <!-- <div class="container bg-black/70 rounded-md text-cyan-500" transition:fade={{duration: 2000, easing: cubicInOut}}> -->
+    <!-- <div class="container bg-black/70 rounded-md text-cyan-500" transition:fly={{duration: 2000, easing: cubicInOut, y: 100}}> -->
+     <!-- <div class="container bg-black/70 rounded-md text-cyan-500" 
+     in:fly={{duration: 2000, easing: cubicInOut, y: 100}} 
+     out:blur={{ duration: 2000, amount: 10}}
+     onintrostart={() => (console.log('introstart'))}
+     onintroend={() => (console.log('introend'))}
+     onoutrostart={() => (console.log('outrostart'))}
+     onoutroend={() => (console.log('outroend'))}
+     >
+        <h1 class="font-bold text-2xl">Hola Mi nombre es Martin Reyes</h1>
+        <p class="text-xl">Soy una persona que es heroe por diversión</p>
+        <p class="text-md">
+            Del barrio
+            <span class="text-green-600">Voy hacer millonario</span>
+            2026 
+        </p>
+        
+    </div>
 {/if} -->
 
-<!--Tippy.js -->
-
-<!-- <input type="text" name="tippy" id="tippy" bind:value={content}>
-
-<button use:tippy={() => ({
-    content: content,
-    animation: "scale"
-})}>Button</button>
-
-<button {@attach tippy2({content})}>Button 2</button> -->
-
-<!-- Elementos Especiales -->
- <!--  El elemento <svelte:window> nos permite escuchar eventos del objeto window -->
-<!-- Debe de colocarse en el nivel superior del componente -->
-
-<!-- <div class="fixed">{scrollY}</div>
-<svelte:window 
-bind:scrollY={scrollY}
-onscroll={(e) => {
-    console.log(e);
-    
-}} /> -->
-<!-- <div class="fixed">{scrollY.current}</div> -->
-
-<!-- El elemento <svelte:document> nos permite escuchar eventos del objeto document -->
-<!-- {visibilityState}
-<svelte:document bind:visibilityState={visibilityState} onvisibilitychangecapture={(e) => {
-    console.log(document.visibilityState);    
-}}/> -->
-
-<!-- El elemento <svelte:body> nos permite escuchar eventos del objeto body -->
- <!-- <svelte:body  onmouseenter={() => {
-    console.log('mousenter');
-    
- }} /> -->
-
- <!-- El elemento <svelte:head> nos permite escuchar eventos del objeto head -->
-<!-- <svelte:head>
-    <title>Elementos Especiales en Svelte</title>
-</svelte:head> -->
+<!-- <Contador /> -->
 
 
-<!-- <svelte:boundary onerror={(e) => {
-    console.log(e); // Reportar el error a un servicio externo.    
-}}>
-    <BuggyComponent />
+<input type="checkbox" bind:checked={mostrarDiv}>
 
-    {#snippet failed(error: any, reset)}
-        <p>{error?.message}</p>        
-        <button onclick={reset}>Reset</button>
-    {/snippet}
-</svelte:boundary>
+{#if mostrarDiv}
+    <div class="container bg-black/70 rounded-md text-cyan-500" 
+        transition:fadejs={{ duration: 400 }}
+        onintrostart={() => (console.log('introstart'))}
+        onintroend={() => (console.log('introend'))}
+        onoutrostart={() => (console.log('outrostart'))}
+        onoutroend={() => (console.log('outroend'))}
+        >
+        <h1 class="font-bold text-2xl">Hola Mi nombre es Martin Reyes</h1>
+        <p class="text-xl">Soy una persona que es heroe por diversión</p>
+        <p class="text-md">
+            Del barrio
+            <span class="text-green-600">Voy hacer millonario</span>
+            2026 
+        </p>
+        
+</div>
+{/if}
 
-<div class="h-[1000px]"></div> -->
-
-<!-- Vinculación de atributos de elementos -->
-<!-- {textAreaWidth} x {textAreaHeight}
-<textarea name="textarea" id="textarea" bind:offsetWidth={textAreaWidth} bind:offsetHeight={textAreaHeight}></textarea> -->
-
-<!-- Vinculación de elementos multimedia -->
- <!-- {imageWidth} x {imageHeight}
- <img src="https://picsum.photos/200/300" bind:naturalWidth={imageWidth} bind:naturalHeight={imageHeight} alt=""> -->
-
- <!-- <VideoPlayer src="https://previews.customer.envatousercontent.com/h264-video-previews/3502107.mp4" /> -->
-
-
- <!-- Controlar multiples videos con script module -->
-
-<input type="checkbox" bind:checked={showVideo}>
-<br />
-
-<button onclick={() => {
-    console.log(getAllVideo());
-    
-}}>Get All Videos</button>
-<button onclick={() => {
-    playAll()
-}}>Play Todos</button>
-<button onclick={() => {
-    pauseAll()
-}}>Pausar Todos</button>
-
- <VideoPlayer src="https://previews.customer.envatousercontent.com/h264-video-previews/3502107.mp4" /> 
- <VideoPlayer src="https://previews.customer.envatousercontent.com/h264-video-previews/3502107.mp4" /> 
-
- {#if showVideo}
-    <VideoPlayer src="https://previews.customer.envatousercontent.com/h264-video-previews/3502107.mp4" /> 
- {/if}
 
 <style>
     :global {

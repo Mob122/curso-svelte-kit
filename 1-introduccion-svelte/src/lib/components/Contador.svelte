@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fly, scale } from "svelte/transition";
+
     let contador = $state(0);
     let frecuencia = $state(1000);
     let pausado = $state(false);
@@ -7,6 +9,7 @@
         // console.log('contador fuera del intervalo:', contador); // Cuidado con este console.log, porque se ejecuta cada vez que cambia el contador, no solo al crear el intervalo porque el efecto depende de contador.
 
         let intervalo: ReturnType<typeof setInterval>;
+
         if (!pausado) {
             intervalo = setInterval(() => {
                 contador += 1;
@@ -17,7 +20,12 @@
     })
 </script>
 
-<h1>{contador}</h1>
+{#key contador}	
+	<h1 class="inline-block" in:fly={{y: -20}}>{contador}</h1>
+{/key}
+
+<br />
+
 {frecuencia}
 
 <button onclick={() => { 
