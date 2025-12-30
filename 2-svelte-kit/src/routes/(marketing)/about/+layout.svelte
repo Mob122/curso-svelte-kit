@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-    import type { LayoutProps } from './$types';
+    import type { LayoutProps } from '../../about/$types';
 
     let { data, children }: LayoutProps = $props();
 
