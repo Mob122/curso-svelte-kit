@@ -1,0 +1,1 @@
+export const POSTS_POR_PAGINA = 5;

@@ -56,3 +56,9 @@ SvelteKit es un framework basado en Svelte que facilita la creación de aplicaci
 ```bash
 pnpm i daisyui@latest
 ```
+
+- bprogress/core: Biblioteca para crear barras de progreso en aplicaciones web.
+
+```bash
+pnpm i @bprogress/core
+```
